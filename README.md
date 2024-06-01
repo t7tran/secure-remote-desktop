@@ -14,21 +14,26 @@ Installed with the following components:
 
 ## Usage
 
+- Run with readonly filesystem
+
+      mkdir -p /tmp/home /tmp/tmp
+      docker run -p 6901:6901 --read-only -v /tmp/tmp:/tmp -v /tmp/home:/home/viewer t7tran/tiny-remote-desktop
+
 - Run command with mapping to local port `5901` (vnc protocol) and `6901` (vnc web access):
 
-      docker run -d -p 5901:5901 -p 6901:6901 soff/tiny-remote-desktop
+      docker run -d -p 5901:5901 -p 6901:6901 t7tran/tiny-remote-desktop
 
 - Run command with mapping to local port `3389` (rdp protocol):
 
-      docker run -d -p 3389:3389 soff/tiny-remote-desktop
+      docker run -d -p 3389:3389 t7tran/tiny-remote-desktop
 
 - Run command with mapping to local port `5901` (vnc protocol) and `6901` (vnc web access) with access password:
 
-      docker run -d -p 5901:5901 -p 6901:6901 -e VNC_PASSWORD="vncpassword" soff/tiny-remote-desktop
+      docker run -d -p 5901:5901 -p 6901:6901 -e VNC_PASSWORD="vncpassword" t7tran/tiny-remote-desktop
 
 - Run command with mapping to local port `5901` (vnc protocol) and `6901` (vnc web access) with specific resolution:
 
-      docker run -d -p 5901:5901 -p 6901:6901 -e RESOLUTION=1600x1200 soff/tiny-remote-desktop
+      docker run -d -p 5901:5901 -p 6901:6901 -e RESOLUTION=1600x1200 t7tran/tiny-remote-desktop
 
 ## Hints
 

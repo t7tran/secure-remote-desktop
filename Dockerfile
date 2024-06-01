@@ -21,11 +21,12 @@ ENV DISPLAY :0
 ENV RESOLUTION=1920x1080
 
 # add main user
-RUN adduser -D vncviewer
+RUN adduser -D viewer
 
-# change passwords and permissions
-RUN 	echo "vncviewer:vncviewer" | /usr/sbin/chpasswd
+RUN 	echo "viewer:viewer" | /usr/sbin/chpasswd
 
 EXPOSE 5901 6901
+
+USER viewer
 
 ENTRYPOINT ["/bin/bash", "-c", "/entry.sh"]
