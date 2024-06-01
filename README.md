@@ -1,20 +1,16 @@
-# Alpine docker container image with "headless" VNC/RDP environments
+# Alpine docker container image with XFCE4 Desktop for "headless" VNC/RDP environments
+
+Copy enhancements from https://github.com/kincsescsaba/remote-desktop-in-docker
 
 Installed with the following components:
 
-* Desktop environment [**Fluxbox**](http://fluxbox.org)
+* XFCE4 Desktop Environment with full DateTime on the top in order to get Screenshot Evidences
 * xrdp server (default RDP port `3389`)
 * vnc server (default VNC port `5901`)
 * [**noVNC**](https://github.com/novnc/noVNC) - HTML5 VNC client (default http port `6901`)
 * Browsers:
   * Chromium
   * Firefox
-  
-
-## Current provided OS & UI sessions:
-
-* `soff/tiny-remote-desktop`: __Alpine with `Fluxbox` UI session__
-
 
 ## Usage
 
