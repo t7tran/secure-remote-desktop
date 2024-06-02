@@ -14,9 +14,9 @@ Installed with the following components:
 
 - Run with readonly filesystem
 
-      docker run -p 6901:6901 --read-only --mount type=tmpfs,destination=/tmp,tmpfs-mode=1777 --mount type=tmpfs,destination=/home/viewer,tmpfs-mode=1777 t7tran/tiny-remote-desktop
+      docker run -p 6901:6901 --read-only --mount type=tmpfs,destination=/tmp,tmpfs-mode=1777 --mount type=tmpfs,destination=/home/viewer,tmpfs-mode=1777 ghcr.io/t7tran/secure-remote-desktop:1.0.0
 
 - Run command with mapping to local `6901` (vnc web access) with specific resolution:
 
-      docker run -p 6901:6901 -e RESOLUTION=1600x1200 t7tran/tiny-remote-desktop
+      docker run -p 6901:6901 -e RESOLUTION=1600x1200 ghcr.io/t7tran/secure-remote-desktop:1.0.0
 
