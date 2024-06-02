@@ -8,9 +8,10 @@ RUN apt update && \
     wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb && \
     apt install /tmp/chrome.deb && \
     sed -i 's#Exec=/usr/bin/google-chrome-stable#Exec=/usr/bin/google-chrome-stable --no-sandbox --disable-fre --no-default-browser-check --no-first-run --password-store=basic#g' /usr/share/applications/google-chrome.desktop && \
-# install vscode
+    # install vscode
     wget 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64' -O /tmp/code.deb && \
     apt install /tmp/code.deb && \
+    sed -i 's#Exec=/usr/share/code/code#Exec=/usr/share/code/code --no-sandbox#g' /usr/share/applications/code.desktop && \
 # install other tools
     apt install -y openssh-client && \
 # run as non-root user
