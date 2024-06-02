@@ -1,0 +1,26 @@
+FROM alpine:3.20.0
+
+RUN apk upgrade --no-cache && \
+    apk add --no-cache xvfb x11vnc openssl xfce4 adwaita-icon-theme supervisor tilix bash chromium firefox novnc websockify tzdata && \
+# add fonts
+    apk add --no-cache font-terminus font-inconsolata font-dejavu font-noto font-noto-cjk font-awesome font-noto-extra wqy-zenhei && \
+# run as non-root user
+    adduser -D viewer && \
+    echo "viewer:viewer" | /usr/sbin/chpasswd && \
+# install gedit
+    apk add --no-cache gedit && \
+# setup index.html using vnc_lite.html template
+    ln -s /usr/share/novnc/vnc_lite.html /usr/share/novnc/index.html && \
+# clean up
+    rm -rf /apk /tmp/* /var/cache/apk/*
+
+ENV DISPLAY=:0 \
+    RESOLUTION=1920x1080
+
+COPY ./rootfs /
+
+EXPOSE 5901 6901
+
+USER viewer
+
+ENTRYPOINT ["/usr/bin/supervisord"]

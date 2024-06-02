@@ -15,7 +15,7 @@ command=/usr/bin/x11vnc -xkb -noxrecord -noxfixes -noxdamage -display :0 -nopw -
 autorestart=true
 
 [program:novnc]
-command=/usr/bin/websockify --web=/usr/share/novnc/ 6901 localhost:5901
+command=/usr/bin/novnc_server --vnc localhost:5901 --listen 6901
 autorestart=true
 
 [program:xfce]
@@ -28,6 +28,6 @@ autorestart=false
 startretries = 1
 
 [program:chromium]
-command=/usr/bin/google-chrome --no-sandbox --disable-fre --no-default-browser-check --no-first-run --password-store=basic
+command=/usr/bin/chromium-browser --no-sandbox
 autorestart=false
 startretries = 1
