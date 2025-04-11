@@ -18,6 +18,7 @@ RUN apt update && \
                     mysql-client \
                     git git-lfs git-credential-oauth \
                     zenity \
+                    vim \
                     && \
 # install postgresql client
     install -d /usr/share/postgresql-common/pgdg && \
