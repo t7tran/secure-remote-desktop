@@ -18,6 +18,7 @@ RUN apt update && \
                     curl \
                     openssh-client \
                     mysql-client \
+                    git git-lfs git-credential-oauth \
                     && \
 # install postgresql client
     install -d /usr/share/postgresql-common/pgdg && \
