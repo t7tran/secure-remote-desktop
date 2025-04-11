@@ -9,8 +9,6 @@ ENV DISPLAY=:0 \
     NVM_VERSION=0.40.2 \
     NVM_DIR=/nvm
 
-COPY ./rootfs /
-
 RUN apt update && \
     export DEBIAN_FRONTEND=noninteractive && \
     apt install -y  tzdata keyboard-configuration ca-certificates \
@@ -37,8 +35,7 @@ RUN apt update && \
     apt install -y fonts-liberation libu2f-udev xdg-utils && \
     curl -fsSL https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -o /tmp/chrome.deb && \
     apt install -y /tmp/chrome.deb && \
-    sed -i 's#Exec=/usr/bin/google-chrome-stable#Exec=/usr/bin/google-chrome-stable --no-sandbox --disable-fre --no-default-browser-check --no-first-run --password-store=basic#g' /usr/share/applications/google-chrome.desktop && \
-    # install vscode
+# install vscode
     curl -fsSL 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64' -o /tmp/code.deb && \
     apt install -y /tmp/code.deb && \
     sed -i 's#Exec=/usr/share/code/code#Exec=/usr/share/code/code --no-sandbox#g' /usr/share/applications/code.desktop && \
@@ -63,6 +60,8 @@ RUN apt update && \
     apt clean && \
     apt autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/*
+
+COPY ./rootfs /
 
 EXPOSE 6901
 
