@@ -51,6 +51,9 @@ RUN apt update && \
     nvm install --lts && \
     nvm install 20 && \
     nvm install 18 && \
+# install jdk
+    apt install -y openjdk-8-jdk && \
+    apt install -y openjdk-21-jdk && \
 # run as non-root user
     echo "ubuntu:ubuntu" | /usr/sbin/chpasswd && \
 # setup index.html using vnc_lite.html template
