@@ -2,7 +2,14 @@ FROM ubuntu:24.04
 
 ENV DISPLAY=:0 \
     RESOLUTION=1920x1080 \
-    TZ=Australia/Melbourne
+    TZ=Australia/Melbourne \
+    # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
+    SF_VERSION=2.83.7 \
+    # https://github.com/nvm-sh/nvm/releases
+    NVM_VERSION=0.40.2 \
+    NVM_DIR=/nvm
+
+COPY ./rootfs /
 
 RUN apt update && \
     export DEBIAN_FRONTEND=noninteractive && \
@@ -34,6 +41,16 @@ RUN apt update && \
     curl -fsSL 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64' -o /tmp/code.deb && \
     apt install -y /tmp/code.deb && \
     sed -i 's#Exec=/usr/share/code/code#Exec=/usr/share/code/code --no-sandbox#g' /usr/share/applications/code.desktop && \
+# install nodejs
+    mkdir -p ${NVM_DIR:?} && \
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION:?}/install.sh | bash && \
+    echo yarn                            >  ${NVM_DIR:?}/default-packages && \
+    echo pnpm                            >> ${NVM_DIR:?}/default-packages && \
+    echo @salesforce/cli@${SF_VERSION:?} >> ${NVM_DIR:?}/default-packages && \
+    . $NVM_DIR/nvm.sh && \
+    nvm install --lts && \
+    nvm install 20 && \
+    nvm install 18 && \
 # run as non-root user
     echo "ubuntu:ubuntu" | /usr/sbin/chpasswd && \
 # setup index.html using vnc_lite.html template
@@ -42,8 +59,6 @@ RUN apt update && \
     apt clean && \
     apt autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/*
-
-COPY ./rootfs /
 
 EXPOSE 6901
 
