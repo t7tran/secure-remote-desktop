@@ -54,6 +54,7 @@ RUN apt update && \
 # install jdk
     apt install -y openjdk-8-jdk && \
     apt install -y openjdk-21-jdk && \
+    apt install -y maven && \
 # run as non-root user
     echo "ubuntu:ubuntu" | /usr/sbin/chpasswd && \
 # setup index.html using vnc_lite.html template
